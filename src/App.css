@@ -1,5 +1,11 @@
 .App {
+  background-color: #282c34;
   text-align: center;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-logo {
@@ -18,4 +24,29 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.store {
+  border: 1px solid black;
+  background-color: whitesmoke;
+  width: 33%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn.addToCart {
+  margin-right: 10px;
 }

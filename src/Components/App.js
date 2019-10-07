@@ -1,6 +1,9 @@
 import React from "react";
-import "../App.css";
-import { stores } from "../content";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  return { stores: state.stores };
+};
 
 class App extends React.Component {
   storeHandler = e => {
@@ -10,21 +13,21 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          {Object.keys(stores).map(key => (
-            <img
-              src={stores[key].image}
-              className="store-logo"
-              alt="logo"
-              id={key}
-              key={key}
-              onClick={this.storeHandler}
-            />
-          ))}
-        </header>
+        {Object.keys(this.props.stores).map(key => (
+          <img
+            src={this.props.stores[key].image}
+            className="store-logo"
+            alt="logo"
+            id={key}
+            key={key}
+            onClick={this.storeHandler}
+          />
+        ))}
       </div>
     );
   }
 }
 
-export default App;
+const ConnectedApp = connect(mapStateToProps)(App);
+
+export default ConnectedApp;

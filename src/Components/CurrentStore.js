@@ -20,26 +20,39 @@ const mapDispatchToProps = dispatch => {
 
 class CurrentStore extends React.Component {
   state = {
-    storeItems: {},
-    cartItems: {},
-    favoriteItems: {}
+    storeItems: [],
+    cartItems: [],
+    favoriteItems: []
   };
 
   componentDidMount() {
-    const { items, stores, match } = this.props;
+    const { stores, match } = this.props;
     const storeId = match.params.storeId;
+    //save the ids of the items, not the actual items
     this.setState({
-      storeItems: stores[storeId].items.map(itemId => items[itemId])
+      storeItems: stores[storeId].items
     });
   }
 
   //cart methods
-  addToCart = item => {
-    const cartItems = this.state.cartItems;
-    cartItems[item.id] = item;
-    if (cartItems[item.id].count) cartItems[item.id].count++;
-    else cartItems[item.id].count = 1;
-    this.props.decrementQuantity(item.id);
+  addToCart = itemId => {
+    const cartItems = [...this.state.cartItems];
+    var itemExists = false;
+    //check for itemId inside the array of objects
+    cartItems.forEach(item => {
+      if (item.itemId === itemId) {
+        //increase count if it exists already
+        item.count++;
+        itemExists = true;
+      }
+    });
+    //if it was not added to cart yet, or there are no products, add itemId
+    if (cartItems.length < 1 || !itemExists)
+      cartItems.push({ itemId, count: 1 });
+
+    //decrement Quantity from store
+    this.props.decrementQuantity(itemId);
+
     this.setState({
       cartItems
     });
@@ -57,14 +70,13 @@ class CurrentStore extends React.Component {
   };
 
   //favorite methods
-  addToFavorites = item => {
-    const favoriteItems = this.state.favoriteItems;
-    favoriteItems[item.id] = item;
-    this.props.incrementFavorites(item.id);
-
-    this.setState({
-      favoriteItems
-    });
+  addToFavorites = itemId => {
+    // const favoriteItems = this.state.favoriteItems;
+    // favoriteItems[item.id] = item;
+    // this.props.incrementFavorites(item.id);
+    // this.setState({
+    //   favoriteItems
+    // });
   };
 
   removeFromFavorites = itemId => {
@@ -83,6 +95,7 @@ class CurrentStore extends React.Component {
       <React.Fragment>
         <ItemsList
           storeItems={storeItems}
+          items={this.props.items}
           addToCart={this.addToCart}
           addToFavorites={this.addToFavorites}
         />

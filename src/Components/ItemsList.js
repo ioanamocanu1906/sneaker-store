@@ -6,10 +6,9 @@ class ItemsList extends React.Component {
     return (
       <div className="store items-list">
         <h1>Products</h1>
-        {Object.entries(this.props.storeItems).map(([id, value]) => (
+        {Object.values(this.props.storeItems).map(itemId => (
           <Item
-            key={id}
-            value={value}
+            value={itemId}
             addToCart={this.props.addToCart}
             addToFavorites={this.props.addToFavorites}
           />

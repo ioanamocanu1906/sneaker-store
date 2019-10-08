@@ -1,42 +1,40 @@
 export const stores = {
   FOOTLOCKER: {
-    id: "0",
+    id: "1210",
     image: "/images/foot-locker-logo.jpg",
     name: "FootLocker",
-    items: [0, 1]
+    items: [212, 112]
   },
   FOOTSHOP: {
-    id: "1",
+    id: "3121",
     image: "/images/foot-shop-logo.png",
     name: "FootShop",
-    items: [1, 2]
+    items: [112, 243]
   },
   SNEAKERINDUSTRY: {
-    id: "2",
+    id: "3452",
     image: "/images/sneaker-industry-logo.png",
     name: "Sneaker Industry",
-    items: [0, 2]
+    items: [212, 243]
   }
 };
 
 export const items = {
-  0: {
-    id: 0,
+  212: {
     image: "/images/45310.jpg",
     name: "REEBOK WORKOUT LO PLUS",
     price: 400,
     stock: 40,
     favoritedBy: 52
   },
-  1: {
-    id: 1,
+  112: {
     image: "/images/46162.jpg",
     name: "VANS X THE NIGHTMARE BEFORE CHRISTMAS ERA STACKED",
     price: 300,
     stock: 54,
     favoritedBy: 253
   },
-  2: {
+  243: {
     id: 2,
     image: "/images/43068.jpg",
     name: "ADIDAS SUPERCOURT W",

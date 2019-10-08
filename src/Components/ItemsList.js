@@ -1,24 +1,18 @@
 import React from "react";
+import Item from "./Item";
 
 class ItemsList extends React.Component {
   render() {
     return (
       <div className="store items-list">
+        <h1>Products</h1>
         {Object.entries(this.props.storeItems).map(([id, value]) => (
-          <div className="item-container" key={id}>
-            <h3>{value.name}</h3>
-            <img src={value.image} alt={value.name} />
-            <h4>Price: {value.price}</h4>
-            <div className="btn-container">
-              <button
-                className="btn addToCart"
-                onClick={this.props.addToCart.bind(null, value)}
-              >
-                Add to Cart
-              </button>
-              <button className="btn addToFavorites">Add to Favorites</button>
-            </div>
-          </div>
+          <Item
+            key={id}
+            value={value}
+            addToCart={this.props.addToCart}
+            addToFavorites={this.props.addToFavorites}
+          />
         ))}
       </div>
     );

@@ -8,11 +8,19 @@ class Cart extends React.Component {
         <h1>Cart</h1>
         <div className="cart-items">
           {Object.keys(cartItems).map(id => (
-            <React.Fragment>
+            <React.Fragment key={id}>
               <div className="cart-item-container" key={id}>
-                <h3>{cartItems[id].name}</h3>
-                <h4>Price: {cartItems[id].price * cartItems[id].count}</h4>
-                <h5>Count: {cartItems[id].count}</h5>
+                <span className="cart-item name">{cartItems[id].name}</span>
+                <span className="cart-item price">
+                  Price: {cartItems[id].price * cartItems[id].count}
+                </span>
+                <span className="cart-item q">Q: {cartItems[id].count}</span>
+                <button
+                  className="btn remove-item"
+                  onClick={this.props.removeFromCart.bind(null, id)}
+                >
+                  &times;
+                </button>
               </div>
               <hr />
             </React.Fragment>

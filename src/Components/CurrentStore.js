@@ -6,10 +6,17 @@ import ItemsList from "./ItemsList";
 import Cart from "./Cart";
 import Favorites from "./Favorites";
 
+import { bindActionCreators } from "redux";
+import * as actionCreators from "../Actions/actionCreators";
+
 const mapStateToProps = ({ stores, items }) => ({
   stores,
   items
 });
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(actionCreators, dispatch);
+};
 
 class CurrentStore extends React.Component {
   state = {
@@ -32,9 +39,41 @@ class CurrentStore extends React.Component {
     cartItems[item.id] = item;
     if (cartItems[item.id].count) cartItems[item.id].count++;
     else cartItems[item.id].count = 1;
+    this.props.decrementQuantity(item.id);
+    this.setState({
+      cartItems
+    });
+  };
+
+  removeFromCart = itemId => {
+    const cartItems = this.state.cartItems;
+    delete cartItems[itemId].count;
+    delete cartItems[itemId];
+    this.props.incrementQuantity(itemId);
 
     this.setState({
       cartItems
+    });
+  };
+
+  //favorite methods
+  addToFavorites = item => {
+    const favoriteItems = this.state.favoriteItems;
+    favoriteItems[item.id] = item;
+    this.props.incrementFavorites(item.id);
+
+    this.setState({
+      favoriteItems
+    });
+  };
+
+  removeFromFavorites = itemId => {
+    const favoriteItems = this.state.favoriteItems;
+    delete favoriteItems[itemId];
+    this.props.decrementFavorites(itemId);
+
+    this.setState({
+      favoriteItems
     });
   };
 
@@ -42,14 +81,24 @@ class CurrentStore extends React.Component {
     const { storeItems, cartItems, favoriteItems } = this.state;
     return (
       <React.Fragment>
-        <ItemsList storeItems={storeItems} addToCart={this.addToCart} />
-        <Favorites favoriteItems={favoriteItems} />
-        <Cart cartItems={cartItems} />
+        <ItemsList
+          storeItems={storeItems}
+          addToCart={this.addToCart}
+          addToFavorites={this.addToFavorites}
+        />
+        <Favorites
+          favoriteItems={favoriteItems}
+          removeFromFavorites={this.removeFromFavorites}
+        />
+        <Cart cartItems={cartItems} removeFromCart={this.removeFromCart} />
       </React.Fragment>
     );
   }
 }
 
-const ConnectedCurrentStore = connect(mapStateToProps)(CurrentStore);
+const ConnectedCurrentStore = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CurrentStore);
 
 export default ConnectedCurrentStore;

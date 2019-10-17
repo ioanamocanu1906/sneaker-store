@@ -1,10 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
-import "./index.css";
-import Router from "./Components/Router";
 import { Provider } from "react-redux";
-import store from "./store";
-import "./App.css";
+import store from "./Store/store";
+import Router from "./Components/AppComponents/Router";
+import "./index.css";
 
 render(
   <Provider store={store}>

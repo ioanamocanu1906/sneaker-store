@@ -1,6 +1,7 @@
 import { createStore } from "redux";
-import rootReducer from "./Reducers/index";
-import { stores, items } from "./content";
+import rootReducer from "./rootReducer";
+import stores from "../Data/stores";
+import items from "../Data/items";
 
 const initialState = {
   stores,

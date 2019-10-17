@@ -1,0 +1,30 @@
+.itemContainer {
+    background-color: white;
+    width: 70%;
+    box-shadow: 1px 3px 2px gray;
+    margin-bottom: 10px;
+    border-radius: 5%;
+    padding-bottom: 2%;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.addToFavoritesF, .addToFavoritesT {
+    background: none;
+    border: none;
+    font-size: 30px;
+}
+
+.addToFavoritesT {
+    color: red;
+}
+
+.addToCart {
+    margin-right: 10px;
+    border-radius: 10px;
+    background: none;
+    box-shadow: 0 0 2px gray;
+}

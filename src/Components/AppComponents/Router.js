@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import CurrentStore from "./CurrentStore";
+import CurrentStore from "../CurrentStoreComponents/CurrentStore";
 import App from "./App";
 
 const Router = () => (
